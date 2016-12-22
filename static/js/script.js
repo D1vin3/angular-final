@@ -1,12 +1,34 @@
 var app = angular.module('app', ['ngRoute']);
 
+
+app.controller('appCtrl', function($scope){
+  console.log('appcTRl is working');
+  // $scope.loggedIn = false;
+})
+
+app.controller('logCtrl', function($scope){
+  console.log('LogCTRl');
+  $scope.loggedIn = false;
+  $scope.nick = "D1vin3";
+
+})
+
 app.config(function($routeProvider){ 
   $routeProvider
     .when('/', {
       templateUrl: 'templates/home.html'
     })
     .when('/posts', {
-      template: '<h1>Hello world</h1>'
+      templateUrl: 'templates/posts.html'
+    })
+    .when('/signin', {
+      templateUrl: 'templates/signin.html'
+    })
+    .when('/signup', {
+      templateUrl: 'templates/signup.html'
+    })
+    .when('/shop',{
+      templateUrl: 'templates/shop.html'
     })
   })
 
