@@ -41,10 +41,10 @@
       </form>
 
       <ul ng-controller='logCtrl' class="nav navbar-nav navbar-right">
-        <li ng-hide='loggedIn'><a href="#signin">Sign In</a></li>
-        <li ng-hide='loggedIn'><a href="#signup">Sign up</a></li>
-        <li ng-show='loggedIn' class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nick }} <span class="caret"></span></a>
+        <li ng-hide='myFactory.loggedIn'><a href="#signin">Sign In</a></li>
+        <li ng-hide='myFactory.loggedIn'><a href="#signup">Sign up</a></li>
+        <li ng-show='myFactory.loggedIn' class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ myFactory.nick }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#profile">Edit profile</a></li>
             <li role="separator" class="divider"></li>
@@ -59,11 +59,18 @@
 	<div class="main">
 			
 
-		<a href="#/">Home</a>
-		<a href="#posts">Posts</a>
 		<ng-view></ng-view>
 	</div>
 
-
+<script>
+  function isLocalStorageAvailable()
+{
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}
+</script>
 </body>
 </html>
