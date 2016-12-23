@@ -1,0 +1,23 @@
+<div class="res">
+	<h1>Search page</h1>
+	
+	
+	<div class="row">
+		<div class="col-sm-3">
+			<ul class="nav nav-pills nav-stacked">
+					<li role='presentation' ng-repeat="res in result" ng-click='selectRes(res)'>
+						<a href="">{{ res.goodName }}</a>
+					</li>
+			</ul>
+		</div>
+		<div class="col-sm-9" id="info" ng-hide="s">
+			<h1>{{ res_category }}</h1>
+			<hr>
+			<h3>{{ res_description}}</h3>
+			<h4>{{ res_price | currency }}</h4>
+			<img src="images/{{ res_img }}">
+		</div>
+	</div>
+
+
+</div>

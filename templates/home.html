@@ -1,1 +1,16 @@
-<h1>Home page</h1>
+<!-- <div ng-repeat="post in posts"> -->
+    <!-- <a href="#/posts/{{post.id}}">{{post.name}}</a> -->
+<!-- </div> -->
+<div class="items">
+    <h1>Select the section you are interested in</h1>	
+
+	<div class="blocks">
+		<a href="#/goods/{{category.category}}" ng-repeat='category in categories'>
+			<div class="woman">
+				<div class="black"></div>
+				<p>{{ category.category }}</p>
+				<img src="images/{{ category.imgSrc }}">
+			</div>
+		</a>
+	</div>
+</div>
