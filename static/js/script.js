@@ -126,6 +126,9 @@ app.config(function($routeProvider){
     .when('/shop',{
       templateUrl: 'templates/shop.html'
     })
+    .when('/good', {
+      templateUrl: 'templates/good.html'
+    })
     .otherwise({
       templates: '404 no such page'
     })

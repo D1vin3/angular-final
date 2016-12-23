@@ -44,12 +44,41 @@ body{
 	}
 	
 }
+.items{
+	h1{
+	color:#009688;
+	text-align: center;
+	}
+}
 
 .blocks{
 	width: 1250px;
-	height: 650px;
-	background-color: lightblue;
+	height: 503px;
+	//background-color: lightblue;
+	background-color: #f0f0f0;
+	border: 1px solid;
 	margin: 0 auto;
+	.black{
+		width: 400px;
+		height: 100px;
+		background-color: black;
+		position: absolute;
+		opacity: 0.6;
+		margin-top: 400px;
+		}
+	.black:hover{
+		opacity: 0.9;
+	}
+		
+	p{
+		font-size:50px;
+		color: white;
+		font-family: sans-serif;
+		position: absolute;
+		margin-top: 410px;
+		margin-left: 130px;
+	}
+
 	.woman{
 		width: 400px;
 		height: 500px;
@@ -57,6 +86,7 @@ body{
 		display: inline-block;
 		float: left;
 		background-image: url("women.jpg");
+
 	}
 	.man{
 		width: 400px;
@@ -79,3 +109,61 @@ body{
 
 	}
 }
+
+.products{
+	width: 1300px;
+	height: 600px;
+	background-color: lightblue;
+	margin: 0 auto;
+
+	.leftNavbar{
+		width: 300px;
+		height: 600px;
+		background-color: lightgreen;
+		display: inline-block;
+		float: left;
+	}
+	.prod{
+		width: 1000px;
+		height: 600px;
+		background-color: #f0f0f0;;
+		display: inline-block;
+		float: right;
+		.prod-nav{
+			p{
+				font-size: 30px;
+				color: #009688;
+				margin-top: 20px;
+				margin-left: 20px;
+			}
+			hr{
+				margin-top: -10px;
+			}
+		}
+
+	}
+		.oneItem{
+			width: 233px;
+			height: 350px;
+			background-color: white;
+			margin:20px;
+			border: solid 1px;
+			display: inline-block;
+			img{
+				width: 230px;
+				height: 300px;
+			}
+			p{
+				margin-left: 20px;
+			}
+
+			span{
+				position: absolute;
+				margin-top: -30px;
+				margin-left: 50px;
+				color: #aaa;
+
+			}
+		}
+}
+
