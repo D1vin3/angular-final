@@ -10,7 +10,9 @@
 	<script src="static/js/less.min.js"></script>
 	<script src="static/js/angular.min.js"></script>
 	<script src="static/js/angular-route.min.js"></script>
-	<script src="static/js/script.js"></script>
+  <script src="static/js/ngStorage.min.js"></script>
+  <script src="static/js/script.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script> -->
 </head>
 <body>
 
@@ -43,12 +45,13 @@
       <ul ng-controller='logCtrl' class="nav navbar-nav navbar-right">
         <li ng-hide='myFactory.loggedIn'><a href="#signin">Sign In</a></li>
         <li ng-hide='myFactory.loggedIn'><a href="#signup">Sign up</a></li>
+        <!-- <li ng-show=''>lolOLO</li> -->
         <li ng-show='myFactory.loggedIn' class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ myFactory.nick }} <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ myFactory.nick }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#profile">Edit profile</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Log out</a></li>
+            <li><a href="#/" ng-click="signOut()">Log out</a></li>
           </ul>
         </li>
       </ul>
@@ -57,20 +60,9 @@
 </nav>
 
 	<div class="main">
-			
-
 		<ng-view></ng-view>
 	</div>
 
-<script>
-  function isLocalStorageAvailable()
-{
-    try {
-        return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-        return false;
-    }
-}
-</script>
+
 </body>
 </html>

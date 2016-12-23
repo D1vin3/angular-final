@@ -10,7 +10,7 @@
 	if(mysqli_num_rows($res2)==0){
 		if($res=$conn->query($query)){	
 			// header("Location:signin.php");
-			echo $name;
+			echo $email;
 			console.log("REGISTRATION COMPLETED SUCCESSFULLY");
 	}}else{
 		echo 'fuck';
