@@ -1,4 +1,18 @@
-<div class="products">
+<div class="cart">
+
+	<h1>Shopping Cart</h1>
+	<!-- <p ng-repeat="c in cart">{{ c }}</p> -->
+		<div class="oneItem" ng-repeat='c in cart'>
+			<a href=""><img src="images/{{ c.img }}"></a>
+			<p>{{ c.price | currency }}</p>
+			<p>{{ c.name }}</p><span>/{{ c.desc }}</span>
+		</div>
+		<h2>{{ total | currency }}</h2>
+
+</div>
+
+
+<!-- <div class="products">
 	<div class="leftNavbar"></div>
 
 	<div class="prod">
@@ -17,4 +31,4 @@
 
 	</div>
 
-</div>
+</div> -->

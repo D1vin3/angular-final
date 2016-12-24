@@ -25,19 +25,19 @@ app.controller('logCtrl', function($scope, myFactory, $localStorage){
 
 
 
-app.controller('regCtrl', function($scope, $http, myFactory){
+app.controller('regCtrl', function($scope, $http, myFactory, $location){
   console.log('regCtrl in process');
   $scope.myFactory = myFactory;
 
   $scope.signUp = function(){
-    // console.log('data is ', $scope.name, $scope.surname, $scope.email, $scope.password);
     var url = "http://localhost/web/final/php/signup.php";
     $http.get(url + "?email=" +$scope.email + "&password=" + $scope.password + "&name="+ $scope.name + "&surname=" + $scope.surname)
       .then(function(response) {
       if(response.data == $scope.email  ){
         $scope.myFactory.loggedIn = true;
         $scope.myFactory.nick = $scope.name;
-        alert('wp');
+        $location.path("/");
+
       }else{
         alert ("error");
       }
@@ -46,7 +46,7 @@ app.controller('regCtrl', function($scope, $http, myFactory){
 })
 
 
-app.controller('loginCtrl',function($scope, $http, $localStorage, myFactory){
+app.controller('loginCtrl',function($scope, $http, $localStorage, myFactory, $location){
   $scope.myFactory = myFactory;
 
   $scope.signIn = function(){
@@ -54,16 +54,25 @@ app.controller('loginCtrl',function($scope, $http, $localStorage, myFactory){
     $http.get(url+"?email="+ $scope.email + "&password=" + $scope.password)
       .then(function(response){
         if (response.data==$scope.email){
-          alert("loggedIn");
           $localStorage.nick = $scope.email;
           $localStorage.bool = true;
           myFactory.loggedIn = $localStorage.bool;
           myFactory.nick = $localStorage.nick;
+          $location.path("/");
+
         }else{
           alert('log Error');
         }
       })
   }
+})
+
+app.controller('cartCtrl', function($scope, $localStorage, myFactory){
+  $scope.cart = JSON.parse(localStorage.getItem(myFactory.nick));
+  var i = $scope.cart.length; 
+  $scope.total = $scope.cart[i-1]['total'];
+
+
 })
 
 
@@ -90,9 +99,36 @@ app.controller('homeCtrl', function($scope, categoryFactory){
   $scope.categories = categoryFactory.slice(0,3);
 })
 
-app.controller('homeCategoryCtrl', function($scope, $routeParams, categoryFactory){
+app.controller('homeCategoryCtrl', function($scope, $routeParams, categoryFactory, myFactory, $localStorage){
   var categoryType = $routeParams.categoryType;
   $scope.goods = _.filter(categoryFactory, {category: categoryType});
+  $scope.options = categoryFactory;
+
+  $scope.cart = JSON.parse(localStorage.getItem(myFactory.nick)) || [];
+  var j = $scope.cart.length;
+  if(j>0){
+    $scope.total = $scope.cart[j-1]['total'];
+  }else{
+    $scope.total = Number();
+  }
+
+  $scope.checkItem = function(i){
+    $scope.total+=$scope.options[i]['price'];
+    $scope.cart.push({
+      cat: $scope.options[i]['category'],
+      name: $scope.options[i]['goodName'],
+      desc: $scope.options[i]['goodDescr'],
+      price: $scope.options[i]['price'],
+      img : $scope.options[i]['img'],
+      total: $scope.total
+    });
+    localStorage.setItem(myFactory.nick, JSON.stringify($scope.cart));
+
+    alert($scope.total);
+    console.log($scope.cart);
+    alert('added successfully');
+
+  }
 })
 
 
@@ -116,22 +152,22 @@ app.controller('searchCtrl', function($scope, categoryFactory){
     $scope.res_price = result['price'];
     $scope.res_img = result['img'];
   }
-
 })
-
 
 
 app.factory('categoryFactory', function(){
   return [
     {
-      category: 'Women',
-      imgSrc: 'women.jpg',
-      goodName: 'Coat',
+      id: 1,
+      category: 'Women', 
+      imgSrc: 'women.jpg', 
+      goodName: 'Coat', 
       goodDescr: 'Nice coat',
       img: 'coat.jpg',
       price: 500,
     },
     {
+      id: 2,
       category: 'Men',
       imgSrc: 'man.jpg',
       goodName: 'Shift',
@@ -140,6 +176,7 @@ app.factory('categoryFactory', function(){
       price: 600,
     },
     {
+      id: 3,
       category: 'Kids',
       imgSrc: 'kids.jpg',
       goodName: 'Shorts',
@@ -148,13 +185,15 @@ app.factory('categoryFactory', function(){
       price: 900,
     },
     {
+      id: 4,
       category: 'Women',
-      goodName: 'Bag',
+      goodName: 'Dress',
       goodDescr: 'Summer dress',
       img: 'dress2.jpg',
       price: 500,
     },
     {
+      id: 5,
       category: 'Men',
       goodName: 'Jacket',
       goodDescr: 'Light jacket',
@@ -162,6 +201,7 @@ app.factory('categoryFactory', function(){
       price: 500,
     },
     {
+      id: 6,
       category: 'Kids',
       goodName: 'Candies',
       goodDescr: 'Really big candies',
@@ -169,13 +209,15 @@ app.factory('categoryFactory', function(){
       price: 500,
     },
     {
+      id: 7,
       category: 'Women',
-      goodName: 'Bag',
+      goodName: 'Dress',
       goodDescr: 'Nice dress',
       img: 'dress.jpg',
       price: 600,
     },
     {
+      id: 8,
       category: 'Men',
       goodName: 'Jacket',
       goodDescr: 'Warm jacket',
@@ -183,6 +225,7 @@ app.factory('categoryFactory', function(){
       price: 500,
     },
     {
+      id: 9,
       category: 'Kids',
       goodName: 'Jeans',
       goodDescr: '4-5y jeans',
@@ -247,6 +290,10 @@ app.config(function($routeProvider){
     })
     .when('/good', {
       templateUrl: 'templates/good.html'
+    })
+    .when('/cart',{
+      templateUrl: 'templates/cart.html',
+      controller: 'cartCtrl'
     })
     .otherwise({
       templates: '404 no such page'
